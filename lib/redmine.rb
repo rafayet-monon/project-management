@@ -153,25 +153,25 @@ Redmine::AccessControl.map do |map|
     map.permission :manage_files, {:files => [:new, :create], :attachments => :upload}, :require => :loggedin
   end
 
-  map.project_module :wiki do |map|
-    map.permission :view_wiki_pages, {:wiki => [:index, :show, :special, :date_index]}, :read => true
-    map.permission :view_wiki_edits, {:wiki => [:history, :diff, :annotate]}, :read => true
-    map.permission :export_wiki_pages, {:wiki => [:export]}, :read => true
-    map.permission :edit_wiki_pages, :wiki => [:new, :edit, :update, :preview, :add_attachment], :attachments => :upload
-    map.permission :rename_wiki_pages, {:wiki => :rename}, :require => :member
-    map.permission :delete_wiki_pages, {:wiki => [:destroy, :destroy_version]}, :require => :member
-    map.permission :delete_wiki_pages_attachments, {}
-    map.permission :protect_wiki_pages, {:wiki => :protect}, :require => :member
-    map.permission :manage_wiki, {:wikis => [:edit, :destroy], :wiki => :rename}, :require => :member
-  end
+  # map.project_module :wiki do |map|
+  #   map.permission :view_wiki_pages, {:wiki => [:index, :show, :special, :date_index]}, :read => true
+  #   map.permission :view_wiki_edits, {:wiki => [:history, :diff, :annotate]}, :read => true
+  #   map.permission :export_wiki_pages, {:wiki => [:export]}, :read => true
+  #   map.permission :edit_wiki_pages, :wiki => [:new, :edit, :update, :preview, :add_attachment], :attachments => :upload
+  #   map.permission :rename_wiki_pages, {:wiki => :rename}, :require => :member
+  #   map.permission :delete_wiki_pages, {:wiki => [:destroy, :destroy_version]}, :require => :member
+  #   map.permission :delete_wiki_pages_attachments, {}
+  #   map.permission :protect_wiki_pages, {:wiki => :protect}, :require => :member
+  #   map.permission :manage_wiki, {:wikis => [:edit, :destroy], :wiki => :rename}, :require => :member
+  # end
 
-  map.project_module :repository do |map|
-    map.permission :view_changesets, {:repositories => [:show, :revisions, :revision]}, :read => true
-    map.permission :browse_repository, {:repositories => [:show, :browse, :entry, :raw, :annotate, :changes, :diff, :stats, :graph]}, :read => true
-    map.permission :commit_access, {}
-    map.permission :manage_related_issues, {:repositories => [:add_related_issue, :remove_related_issue]}
-    map.permission :manage_repository, {:projects => :settings, :repositories => [:new, :create, :edit, :update, :committers, :destroy]}, :require => :member
-  end
+  # map.project_module :repository do |map|
+  #   map.permission :view_changesets, {:repositories => [:show, :revisions, :revision]}, :read => true
+  #   map.permission :browse_repository, {:repositories => [:show, :browse, :entry, :raw, :annotate, :changes, :diff, :stats, :graph]}, :read => true
+  #   map.permission :commit_access, {}
+  #   map.permission :manage_related_issues, {:repositories => [:add_related_issue, :remove_related_issue]}
+  #   map.permission :manage_repository, {:projects => :settings, :repositories => [:new, :create, :edit, :update, :committers, :destroy]}, :require => :member
+  # end
 
   map.project_module :boards do |map|
     map.permission :view_messages, {:boards => [:index, :show], :messages => [:show]}, :read => true
@@ -249,28 +249,28 @@ Redmine::MenuManager.map :admin_menu do |menu|
             :html => {:class => 'icon icon-projects'}
   menu.push :users, {:controller => 'users'}, :caption => :label_user_plural,
             :html => {:class => 'icon icon-user'}
-  menu.push :groups, {:controller => 'groups'}, :caption => :label_group_plural,
-            :html => {:class => 'icon icon-group'}
+  # menu.push :groups, {:controller => 'groups'}, :caption => :label_group_plural,
+  #           :html => {:class => 'icon icon-group'}
   menu.push :roles, {:controller => 'roles'}, :caption => :label_role_and_permissions,
             :html => {:class => 'icon icon-roles'}
   menu.push :trackers, {:controller => 'trackers'}, :caption => :label_tracker_plural,
             :html => {:class => 'icon icon-issue'}
   menu.push :issue_statuses, {:controller => 'issue_statuses'}, :caption => :label_issue_status_plural,
             :html => {:class => 'icon icon-issue-edit'}
-  menu.push :workflows, {:controller => 'workflows', :action => 'edit'}, :caption => :label_workflow,
-            :html => {:class => 'icon icon-workflows'}
-  menu.push :custom_fields, {:controller => 'custom_fields'},  :caption => :label_custom_field_plural,
-            :html => {:class => 'icon icon-custom-fields'}
-  menu.push :enumerations, {:controller => 'enumerations'},
-            :html => {:class => 'icon icon-list'}
-  menu.push :settings, {:controller => 'settings'},
-            :html => {:class => 'icon icon-settings'}
-  menu.push :ldap_authentication, {:controller => 'auth_sources', :action => 'index'},
-            :html => {:class => 'icon icon-server-authentication'}
-  menu.push :plugins, {:controller => 'admin', :action => 'plugins'}, :last => true,
-            :html => {:class => 'icon icon-plugins'}
-  menu.push :info, {:controller => 'admin', :action => 'info'}, :caption => :label_information_plural, :last => true,
-            :html => {:class => 'icon icon-help'}
+  # menu.push :workflows, {:controller => 'workflows', :action => 'edit'}, :caption => :label_workflow,
+  #           :html => {:class => 'icon icon-workflows'}
+  # menu.push :custom_fields, {:controller => 'custom_fields'},  :caption => :label_custom_field_plural,
+  #           :html => {:class => 'icon icon-custom-fields'}
+  # menu.push :enumerations, {:controller => 'enumerations'},
+  #           :html => {:class => 'icon icon-list'}
+  # menu.push :settings, {:controller => 'settings'},
+  #           :html => {:class => 'icon icon-settings'}
+  # menu.push :ldap_authentication, {:controller => 'auth_sources', :action => 'index'},
+  #           :html => {:class => 'icon icon-server-authentication'}
+  # menu.push :plugins, {:controller => 'admin', :action => 'plugins'}, :last => true,
+  #           :html => {:class => 'icon icon-plugins'}
+  # menu.push :info, {:controller => 'admin', :action => 'info'}, :caption => :label_information_plural, :last => true,
+  #           :html => {:class => 'icon icon-help'}
 end
 
 Redmine::MenuManager.map :project_menu do |menu|
@@ -287,16 +287,16 @@ Redmine::MenuManager.map :project_menu do |menu|
   menu.push :new_issue_category, {:controller => 'issue_categories', :action => 'new'},
             :param => :project_id, :caption => :label_issue_category_new,
             :parent => :new_object
-  menu.push :new_version, {:controller => 'versions', :action => 'new'}, :param => :project_id, :caption => :label_version_new,
-            :parent => :new_object
+  # menu.push :new_version, {:controller => 'versions', :action => 'new'}, :param => :project_id, :caption => :label_version_new,
+  #           :parent => :new_object
   menu.push :new_timelog, {:controller => 'timelog', :action => 'new'}, :param => :project_id, :caption => :button_log_time,
             :parent => :new_object
   menu.push :new_news, {:controller => 'news', :action => 'new'}, :param => :project_id, :caption => :label_news_new,
             :parent => :new_object
   menu.push :new_document, {:controller => 'documents', :action => 'new'}, :param => :project_id, :caption => :label_document_new,
             :parent => :new_object
-  menu.push :new_wiki_page, {:controller => 'wiki', :action => 'new'}, :param => :project_id, :caption => :label_wiki_page_new,
-            :parent => :new_object
+  # menu.push :new_wiki_page, {:controller => 'wiki', :action => 'new'}, :param => :project_id, :caption => :label_wiki_page_new,
+  #           :parent => :new_object
   menu.push :new_file, {:controller => 'files', :action => 'new'}, :param => :project_id, :caption => :label_attachment_new,
             :parent => :new_object
 
@@ -314,13 +314,13 @@ Redmine::MenuManager.map :project_menu do |menu|
   menu.push :calendar, { :controller => 'calendars', :action => 'show' }, :param => :project_id, :caption => :label_calendar
   menu.push :news, { :controller => 'news', :action => 'index' }, :param => :project_id, :caption => :label_news_plural
   menu.push :documents, { :controller => 'documents', :action => 'index' }, :param => :project_id, :caption => :label_document_plural
-  menu.push :wiki, { :controller => 'wiki', :action => 'show', :id => nil }, :param => :project_id,
-            :if => Proc.new { |p| p.wiki && !p.wiki.new_record? }
+  # menu.push :wiki, { :controller => 'wiki', :action => 'show', :id => nil }, :param => :project_id,
+  #           :if => Proc.new { |p| p.wiki && !p.wiki.new_record? }
   menu.push :boards, { :controller => 'boards', :action => 'index', :id => nil }, :param => :project_id,
             :if => Proc.new { |p| p.boards.any? }, :caption => :label_board_plural
   menu.push :files, { :controller => 'files', :action => 'index' }, :caption => :label_file_plural, :param => :project_id
-  menu.push :repository, { :controller => 'repositories', :action => 'show', :repository_id => nil, :path => nil, :rev => nil },
-            :if => Proc.new { |p| p.repository && !p.repository.new_record? }
+  # menu.push :repository, { :controller => 'repositories', :action => 'show', :repository_id => nil, :path => nil, :rev => nil },
+  #           :if => Proc.new { |p| p.repository && !p.repository.new_record? }
   menu.push :settings, { :controller => 'projects', :action => 'settings' }, :last => true
 end
 
@@ -330,7 +330,7 @@ Redmine::Activity.map do |activity|
   activity.register :news
   activity.register :documents, :class_name => %w(Document Attachment)
   activity.register :files, :class_name => 'Attachment'
-  activity.register :wiki_edits, :class_name => 'WikiContent::Version', :default => false
+  # activity.register :wiki_edits, :class_name => 'WikiContent::Version', :default => false
   activity.register :messages, :default => false
   activity.register :time_entries, :default => false
 end
@@ -340,7 +340,7 @@ Redmine::Search.map do |search|
   search.register :news
   search.register :documents
   search.register :changesets
-  search.register :wiki_pages
+  # search.register :wiki_pages
   search.register :messages
   search.register :projects
 end
