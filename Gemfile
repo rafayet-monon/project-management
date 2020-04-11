@@ -71,7 +71,7 @@ if File.exist?(database_file)
     warn("No adapter found in config/database.yml, please configure it first")
   end
 else
-  warn("Please configure your config/database.yml first")
+  gem "pg", "~> 1.2.2", :platforms => [:mri, :mingw, :x64_mingw]
 end
 
 group :development do
