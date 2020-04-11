@@ -86,7 +86,7 @@ Redmine::AccessControl.map do |map|
   map.permission :select_project_modules, {:projects => :modules}, :require => :member
   map.permission :view_members, {:members => [:index, :show]}, :public => true, :read => true
   map.permission :manage_members, {:projects => :settings, :members => [:index, :show, :new, :create, :edit, :update, :destroy, :autocomplete]}, :require => :member
-  map.permission :manage_versions, {:projects => :settings, :versions => [:new, :create, :edit, :update, :close_completed, :destroy]}, :require => :member
+  # map.permission :manage_versions, {:projects => :settings, :versions => [:new, :create, :edit, :update, :close_completed, :destroy]}, :require => :member
   map.permission :add_subprojects, {:projects => [:new, :create]}, :require => :member
   # Queries
   map.permission :manage_public_queries, {:queries => [:new, :create, :edit, :update, :destroy]}, :require => :member
@@ -122,7 +122,7 @@ Redmine::AccessControl.map do |map|
     map.permission :delete_issue_watchers, {:watchers => :destroy}
     map.permission :import_issues, {}
     # Issue categories
-    map.permission :manage_categories, {:projects => :settings, :issue_categories => [:index, :show, :new, :create, :edit, :update, :destroy]}, :require => :member
+    # map.permission :manage_categories, {:projects => :settings, :issue_categories => [:index, :show, :new, :create, :edit, :update, :destroy]}, :require => :member
   end
 
   map.project_module :time_tracking do |map|
@@ -261,8 +261,8 @@ Redmine::MenuManager.map :admin_menu do |menu|
   #           :html => {:class => 'icon icon-workflows'}
   # menu.push :custom_fields, {:controller => 'custom_fields'},  :caption => :label_custom_field_plural,
   #           :html => {:class => 'icon icon-custom-fields'}
-  # menu.push :enumerations, {:controller => 'enumerations'},
-  #           :html => {:class => 'icon icon-list'}
+  menu.push :enumerations, {:controller => 'enumerations'},
+            :html => {:class => 'icon icon-list'}
   # menu.push :settings, {:controller => 'settings'},
   #           :html => {:class => 'icon icon-settings'}
   # menu.push :ldap_authentication, {:controller => 'auth_sources', :action => 'index'},
@@ -284,9 +284,9 @@ Redmine::MenuManager.map :project_menu do |menu|
             :if => Proc.new { |p| Issue.allowed_target_trackers(p).any? },
             :permission => :add_issues,
             :parent => :new_object
-  menu.push :new_issue_category, {:controller => 'issue_categories', :action => 'new'},
-            :param => :project_id, :caption => :label_issue_category_new,
-            :parent => :new_object
+  # menu.push :new_issue_category, {:controller => 'issue_categories', :action => 'new'},
+  #           :param => :project_id, :caption => :label_issue_category_new,
+  #           :parent => :new_object
   # menu.push :new_version, {:controller => 'versions', :action => 'new'}, :param => :project_id, :caption => :label_version_new,
   #           :parent => :new_object
   menu.push :new_timelog, {:controller => 'timelog', :action => 'new'}, :param => :project_id, :caption => :button_log_time,
@@ -302,8 +302,8 @@ Redmine::MenuManager.map :project_menu do |menu|
 
   menu.push :overview, { :controller => 'projects', :action => 'show' }
   menu.push :activity, { :controller => 'activities', :action => 'index' }
-  menu.push :roadmap, { :controller => 'versions', :action => 'index' }, :param => :project_id,
-            :if => Proc.new { |p| p.shared_versions.any? }
+  # menu.push :roadmap, { :controller => 'versions', :action => 'index' }, :param => :project_id,
+  #           :if => Proc.new { |p| p.shared_versions.any? }
   menu.push :issues, { :controller => 'issues', :action => 'index' }, :param => :project_id, :caption => :label_issue_plural
   menu.push :new_issue, { :controller => 'issues', :action => 'new', :copy_from => nil }, :param => :project_id, :caption => :label_issue_new,
             :html => { :accesskey => Redmine::AccessKeys.key_for(:new_issue) },
