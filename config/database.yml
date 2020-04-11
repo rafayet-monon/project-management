@@ -2,11 +2,25 @@
 # Examples for PostgreSQL, SQLite3 and SQL Server can be found at the end.
 # Line indentation must be 2 spaces (no tabs).
 
-production:
+default: &default
   adapter: postgresql
-  database: pm_prod
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: rafayetmonon
+  password: root
+
+development:
+  <<: *default
+  database: pm_development
+
+test:
+  <<: *default
+  database: pm_test
+
+production:
+  <<: *default
+  database: pm_prod
+
 
 #development:
 #  adapter: mysql2
